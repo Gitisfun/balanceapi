@@ -7,6 +7,7 @@ import errorHandler from "./errors/ErrorHandler.js";
 import Logger from "./middleware/logger/logger.js";
 
 // Routes
+import usersRoute from "./routes/users.js";
 
 const app = Express();
 const server = http.createServer(app);
@@ -19,6 +20,8 @@ app.use(Express.urlencoded({ extended: true }));
 app.get("/api", (req, res) => {
   res.send("Welcome to the API!!! (v1.0)");
 });
+
+app.use("/api/users/", usersRoute);
 
 app.use((req, res, next) => {
   next(ApiError.notFound("Route not found"));
