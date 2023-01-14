@@ -6,7 +6,6 @@ class Authenticator {
   static hasher(body, query, paramList, responser, res, next) {
     bcrypt.hash(body.password, 10, function (err, hash) {
       if (err) {
-        console.log(err);
         next(err);
       } else {
         paramList.unshift(hash);
@@ -18,7 +17,7 @@ class Authenticator {
   static comparer(user, foundUser, response, next) {
     const ONE_MONTH = 60 * 60 * 24 * 30;
     let msg = {};
-    console.log("D");
+
     bcrypt.compare(user.password, foundUser.password, (err, result) => {
       if (err) {
         next(err);
@@ -27,13 +26,14 @@ class Authenticator {
           msg: "Invalid credentials, try again",
           status: false,
         };
+        return response.status(401).send(msg);
       } else {
         const token = jwt.sign({ foundUser }, process.env.SECRET_KEY, {
           expiresIn: ONE_MONTH,
         });
         const temp = jwt.decode(token);
         msg = {
-          msg: "Login succesful",
+          msg: "You have successfully logged in",
           status: true,
           id: foundUser.id,
           firstname: foundUser.firstname,

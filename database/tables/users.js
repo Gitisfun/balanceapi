@@ -30,24 +30,19 @@ function QUERY_MALIBU() {
 // LOGIC
 
 function findUser(user, response, next) {
-  console.log(QUERY_MALIBU());
   pool.query(QUERY_MALIBU(), [user.username], (err, results) => {
     if (err) {
-      console.log(err);
-      console.log("X");
       next(err);
     } else {
-      console.log("B");
       const foundUser = results[0];
+
       if (foundUser == null) {
-        response.send({
+        response.status(404).send({
           msg: "Username not found",
           msg_nl: "Gebruikersnaam niet gevonden",
           status: false,
         });
       } else {
-        console.log("C");
-        //   response.send(foundUser)
         Authenticator.comparer(user, foundUser, response, next);
       }
     }
@@ -62,7 +57,7 @@ function checkIfUserAlreadyExists(user, response, next) {
       if (results.length === 0) {
         response.send({ msg: "Ok", status: true });
       } else {
-        response.send({
+        response.status(409).send({
           msg: "User already exists",
           msg_nl: "Gebruikersnaam bestaat al",
           status: false,

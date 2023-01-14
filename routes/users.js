@@ -8,7 +8,6 @@ import Authenticator from "../logic/Authenticator.js";
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
-  console.log("hieruheru");
   try {
     queryHandler(() => "select * from users", "", res, next);
   } catch (error) {
@@ -29,7 +28,6 @@ router.post("/register" /*, authenticator*/, (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  console.log("A");
   findUser(req.body, res, next);
 });
 
