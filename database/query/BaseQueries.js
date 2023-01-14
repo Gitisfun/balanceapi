@@ -8,7 +8,7 @@ class BaseQueries {
       QUERY += `${columns[i]}, `;
     }
     QUERY += `${Columns.CREATED_AT}, ${Columns.UPDATED_AT}, ${Columns.DELETED_AT} FROM ${table_name} `;
-    QUERY += `WHERE ${Columns.IS_ACTIVE} = 1 AND ${Columns.ACCOUNT_ID} = ?`;
+    QUERY += `WHERE ${Columns.IS_ACTIVE} = 1 AND ${Columns.USER_ID} = ?`;
     Logger.info(QUERY);
     return QUERY;
   }
@@ -34,9 +34,7 @@ class BaseQueries {
   }
 
   static select(table_name, columns) {
-    const QUERY = `${this.selectAll(table_name, columns)} AND ${
-      Columns.ID
-    } = ?`;
+    const QUERY = `${this.selectAll(table_name, columns)} AND ${Columns.ID} = ?`;
     Logger.info(QUERY);
     return QUERY;
   }
