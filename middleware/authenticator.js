@@ -11,7 +11,7 @@ export default function (req, res, next) {
       if (err) {
         res.status(403).send({ msg: "You don't have access to this route" });
       } else {
-        req.user_id = user.foundUser.id;
+        req.userId = user.foundUser.id;
         next();
       }
     });

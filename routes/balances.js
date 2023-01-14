@@ -16,7 +16,6 @@ router.get("/:id", authenticator, (req, res, next) => {
 });
 
 router.post("/", authenticator, (req, res, next) => {
-  //const paramList = [req.body.name, req.account_id];
   const paramList = [req.body.name, req.body.type, req.body.amount, req.userId];
   queryHandler(QUERY_CREATE, paramList, res, next);
 });
