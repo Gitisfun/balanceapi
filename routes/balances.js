@@ -16,12 +16,12 @@ router.get("/:id", authenticator, (req, res, next) => {
 });
 
 router.post("/", authenticator, (req, res, next) => {
-  const paramList = [req.body.name, req.body.type, req.body.amount, req.userId];
+  const paramList = [req.body.name, req.body.amount, req.userId];
   queryHandler(QUERY_CREATE, paramList, res, next);
 });
 
 router.put("/:id", authenticator, (req, res, next) => {
-  const paramList = [req.body.name, req.body.type, req.body.amount, req.params.id];
+  const paramList = [req.body.name, req.body.amount, req.params.id];
   queryHandler(QUERY_UPDATE, paramList, res, next);
 });
 

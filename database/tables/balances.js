@@ -7,7 +7,6 @@ import BaseQueries from "../query/BaseQueries.js";
 const TABLE_NAME = "balances";
 
 const COLUMN_NAME = "name";
-const COLUMN_TYPE = "type";
 const COLUMN_AMOUNT = "amount";
 
 // JOIN
@@ -17,22 +16,22 @@ export const TABLE_NAME_BALANCES = "balances";
 // QUERIES
 
 function QUERY_GET_ALL() {
-  const COLUMNS = [Columns.ID, COLUMN_NAME, COLUMN_TYPE, COLUMN_AMOUNT];
+  const COLUMNS = [Columns.ID, COLUMN_NAME, COLUMN_AMOUNT];
   return BaseQueries.selectAll(TABLE_NAME, COLUMNS);
 }
 
 function QUERY_GET() {
-  const COLUMNS = [Columns.ID, COLUMN_NAME, COLUMN_TYPE, COLUMN_AMOUNT];
+  const COLUMNS = [Columns.ID, COLUMN_NAME, COLUMN_AMOUNT];
   return BaseQueries.select(TABLE_NAME, COLUMNS);
 }
 
 function QUERY_CREATE() {
-  const COLUMNS = [COLUMN_NAME, COLUMN_TYPE, COLUMN_AMOUNT, Columns.USER_ID];
+  const COLUMNS = [COLUMN_NAME, COLUMN_AMOUNT, Columns.USER_ID];
   return BaseQueries.create(TABLE_NAME, COLUMNS);
 }
 
 function QUERY_UPDATE() {
-  const COLUMNS = [COLUMN_NAME, COLUMN_TYPE, COLUMN_AMOUNT];
+  const COLUMNS = [COLUMN_NAME, COLUMN_AMOUNT];
   return BaseQueries.update(TABLE_NAME, COLUMNS);
 }
 
