@@ -1,5 +1,6 @@
 import Logger from "../../middleware/logger/logger.js";
 import Columns from "../constants/columns.js";
+import QueryStrings from "./QueryStrings.js";
 
 class BaseQueries {
   static selectAll(table_name, columns) {
@@ -66,6 +67,12 @@ class BaseQueries {
     QUERY += ") VALUES ?";
     Logger.info(QUERY);
     return QUERY;
+  }
+
+  static count(table_name, fields) {
+    const QUERY = `SELECT COUNT(*) AS 'total' FROM ${table_name} `;
+    const WHERE = `WHERE ${Columns.IS_ACTIVE} = 1 AND ${Columns.USER_ID} = ? `;
+    return QUERY + WHERE + QueryStrings.filtering(fields);
   }
 }
 

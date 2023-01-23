@@ -9,6 +9,7 @@ import Logger from "./middleware/logger/logger.js";
 // Routes
 import usersRoute from "./routes/users.js";
 import balancesRoute from "./routes/balances.js";
+import transactionsRoute from "./routes/transactions.js";
 
 const app = Express();
 const server = http.createServer(app);
@@ -24,6 +25,7 @@ app.get("/api", (req, res) => {
 
 app.use("/api/users/", usersRoute);
 app.use("/api/balances/", balancesRoute);
+app.use("/api/transactions/", transactionsRoute);
 
 app.use((req, res, next) => {
   next(ApiError.notFound("Route not found"));
