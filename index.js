@@ -9,6 +9,8 @@ import Logger from "./middleware/logger/logger.js";
 // Routes
 import usersRoute from "./routes/users.js";
 import balancesRoute from "./routes/balances.js";
+import categoriesRoute from "./routes/categories.js";
+import productsRoute from "./routes/products.js";
 import transactionsRoute from "./routes/transactions.js";
 
 const app = Express();
@@ -25,6 +27,8 @@ app.get("/api", (req, res) => {
 
 app.use("/api/users/", usersRoute);
 app.use("/api/balances/", balancesRoute);
+app.use("/api/categories/", categoriesRoute);
+app.use("/api/products/", productsRoute);
 app.use("/api/transactions/", transactionsRoute);
 
 app.use((req, res, next) => {
