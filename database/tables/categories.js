@@ -1,5 +1,6 @@
 import Columns from "../constants/columns.js";
 import BaseQueries from "../query/BaseQueries.js";
+import QueryStrings from "../query/QueryStrings.js";
 
 // TABLE NAME AND COLUMNS
 
@@ -11,6 +12,16 @@ const COLUMN_ICON = "icon";
 // JOIN
 
 export const TABLE_NAME_CATEGORIES = "categories";
+
+const CATEGORY_ALIAS_ID = "category_id";
+const CATEGORY_ALIAS_NAME = "category_name";
+const CATEGORY_ALIAS_ICON = "category_icon";
+
+const CATEGORY_COLUMNS = [Columns.ID, COLUMN_NAME, COLUMN_ICON];
+const CATEGORY_ALIASES = [CATEGORY_ALIAS_ID, CATEGORY_ALIAS_NAME, CATEGORY_ALIAS_ICON];
+
+export const CATEGORY_JOIN_SELECT = () => QueryStrings.SELECT_JOIN_OTHER(TABLE_NAME_CATEGORIES, CATEGORY_COLUMNS, CATEGORY_ALIASES);
+export const CATEGORY_JOIN = (table_name, column) => QueryStrings.JOIN(TABLE_NAME_CATEGORIES, table_name, column);
 
 // QUERIES
 

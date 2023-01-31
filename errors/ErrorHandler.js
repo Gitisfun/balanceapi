@@ -8,7 +8,6 @@ function errorHandler(err, req, res, next) {
     next();
     return;
   }
-
   res.status(500).json("Something went wrong on the server");
 }
 

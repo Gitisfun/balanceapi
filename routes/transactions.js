@@ -1,6 +1,8 @@
 import express from "express";
+import MultipleController from "../database/query/MultipleController.js";
 import queryHandler from "../database/query/queryHandler.js";
-import { QUERY_GET, QUERY_GET_ALL, QUERY_CREATE, QUERY_UPDATE, QUERY_DELETE, QUERY_COUNT } from "../database/tables/transactions.js";
+import { QUERY_CREATE_LIST } from "../database/tables/transactionProducts.js";
+import { QUERY_GET, QUERY_GET_ALL, QUERY_CREATE, QUERY_UPDATE, QUERY_DELETE, QUERY_COUNT, TABLE_NAME_TRANSACTIONS } from "../database/tables/transactions.js";
 import Pagination from "../logic/pagination.js";
 import authenticator from "../middleware/authenticator.js";
 
@@ -22,7 +24,11 @@ router.get("/:id", authenticator, (req, res, next) => {
 
 router.post("/", authenticator, (req, res, next) => {
   const paramList = [req.body.name, req.body.price, req.body.description, req.body.date, req.body.type, req.userId];
-  queryHandler(QUERY_CREATE, paramList, res, next);
+  const queries = {
+    create: QUERY_CREATE(),
+    list: QUERY_CREATE_LIST(),
+  };
+  MultipleController.create(TABLE_NAME_TRANSACTIONS, paramList, queries, req, res, next);
 });
 
 router.put("/:id", authenticator, (req, res, next) => {
@@ -32,7 +38,8 @@ router.put("/:id", authenticator, (req, res, next) => {
 
 router.delete("/:id", authenticator, (req, res, next) => {
   const paramList = [req.params.id];
-  queryHandler(QUERY_DELETE, paramList, res, next);
+  //queryHandler(QUERY_DELETE, paramList, res, next);
+  MultipleController.deleteTransaction(paramList, req, res, next);
 });
 
 export default router;

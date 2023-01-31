@@ -27,7 +27,6 @@ router.post("/", authenticator, (req, res, next) => {
 
 router.put("/:id", authenticator, (req, res, next) => {
   const paramList = [req.body.name, req.body.description, req.body.brand, req.body.categoryId, req.params.id];
-  console.log(paramList);
   queryHandler(QUERY_UPDATE, paramList, res, next);
 });
 

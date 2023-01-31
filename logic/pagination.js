@@ -61,7 +61,8 @@ class Pagination {
   }
 
   static validateLimit(request) {
-    if (typeof request.limit === "undefined" || Number.isNaN(parseInt(request.limit)) || parseInt(request.limit) < 2 || parseInt(request.limit) > 50) {
+    // TODO: Change limit max here 1000 should be lower
+    if (typeof request.limit === "undefined" || Number.isNaN(parseInt(request.limit)) || parseInt(request.limit) < 2 || parseInt(request.limit) > 1000) {
       return 10;
     }
     return parseInt(request.limit);
@@ -84,6 +85,7 @@ class Pagination {
   static queryHandler(queryOne, queryParams, paramListOne, queryTwo, paramListTwo, response, next) {
     pool.query(queryOne(queryParams.sortField, queryParams.sortOrder), paramListOne, (err, results) => {
       if (err) {
+        console.log(err);
         next(err);
       } else {
         this.queryCount(queryTwo, queryParams, paramListTwo, results, response, next);
