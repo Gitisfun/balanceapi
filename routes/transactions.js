@@ -2,7 +2,7 @@ import express from "express";
 import MultipleController from "../database/query/MultipleController.js";
 import queryHandler from "../database/query/queryHandler.js";
 import { QUERY_CREATE_LIST } from "../database/tables/transactionProducts.js";
-import { QUERY_GET, QUERY_GET_ALL, QUERY_CREATE, QUERY_UPDATE, QUERY_DELETE, QUERY_COUNT, TABLE_NAME_TRANSACTIONS, QUERY_GET_SHOP } from "../database/tables/transactions.js";
+import { QUERY_GET, QUERY_GET_ALL, QUERY_CREATE, QUERY_UPDATE, QUERY_COUNT, TABLE_NAME_TRANSACTIONS } from "../database/tables/transactions.js";
 import Pagination from "../logic/pagination.js";
 import authenticator from "../middleware/authenticator.js";
 
@@ -15,11 +15,6 @@ router.get("/", authenticator, (req, res, next) => {
   paramList.push(temp.limit);
   paramList.push(temp.offset);
   Pagination.queryHandler(QUERY_GET_ALL, temp, paramList, QUERY_COUNT, [req.userId, temp.searchField], res, next);
-});
-
-router.get("/shops", authenticator, (req, res, next) => {
-  const paramList = [req.userId];
-  queryHandler(QUERY_GET_SHOP, paramList, res, next);
 });
 
 router.get("/:id", authenticator, (req, res, next) => {

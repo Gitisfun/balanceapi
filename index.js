@@ -13,6 +13,7 @@ import categoriesRoute from "./routes/categories.js";
 import productsRoute from "./routes/products.js";
 import transactionsRoute from "./routes/transactions.js";
 import transactionProductsRoute from "./routes/transactionProducts.js";
+import shopsRoute from "./routes/shops.js";
 
 const app = Express();
 const server = http.createServer(app);
@@ -32,6 +33,7 @@ app.use("/api/categories/", categoriesRoute);
 app.use("/api/products/", productsRoute);
 app.use("/api/transactions/", transactionsRoute);
 app.use("/api/transactionproducts/", transactionProductsRoute);
+app.use("/api/shops/", shopsRoute);
 
 app.use((req, res, next) => {
   next(ApiError.notFound("Route not found"));
