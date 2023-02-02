@@ -21,12 +21,12 @@ router.get("/:id", authenticator, (req, res, next) => {
 });
 
 router.post("/", authenticator, (req, res, next) => {
-  const paramList = [req.body.name, req.body.description, req.body.brand, req.body.categoryId, req.userId];
+  const paramList = [req.body.name, req.body.description, req.body.brand, req.body.categoryId, req.body.weightType, req.userId];
   queryHandler(QUERY_CREATE, paramList, res, next);
 });
 
 router.put("/:id", authenticator, (req, res, next) => {
-  const paramList = [req.body.name, req.body.description, req.body.brand, req.body.categoryId, req.params.id];
+  const paramList = [req.body.name, req.body.description, req.body.brand, req.body.categoryId, req.body.weightType, req.params.id];
   queryHandler(QUERY_UPDATE, paramList, res, next);
 });
 
