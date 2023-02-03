@@ -33,7 +33,7 @@ export const PRODUCTS_JOIN = (table_name, column) => QueryStrings.JOIN(TABLE_NAM
 
 function QUERY_GET_ALL() {
   const fields = ["name", "description", "brand"];
-  const COLUMNS = [Columns.ID, COLUMN_NAME, COLUMN_DESCRIPTION, COLUMN_BRAND];
+  const COLUMNS = [Columns.ID, COLUMN_NAME, COLUMN_DESCRIPTION, COLUMN_BRAND, COLUMN_WEIGHT_TYPE];
 
   let QUERY = QueryStrings.SELECT_JOIN_BASE(TABLE_NAME, COLUMNS);
   QUERY += CATEGORY_JOIN_SELECT();
