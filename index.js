@@ -14,6 +14,7 @@ import productsRoute from "./routes/products.js";
 import transactionsRoute from "./routes/transactions.js";
 import transactionProductsRoute from "./routes/transactionProducts.js";
 import shopsRoute from "./routes/shops.js";
+import statisticsRoute from "./routes/statistics.js";
 
 const app = Express();
 const server = http.createServer(app);
@@ -34,6 +35,7 @@ app.use("/api/products/", productsRoute);
 app.use("/api/transactions/", transactionsRoute);
 app.use("/api/transactionproducts/", transactionProductsRoute);
 app.use("/api/shops/", shopsRoute);
+app.use("/api/statistics/", statisticsRoute);
 
 app.use((req, res, next) => {
   next(ApiError.notFound("Route not found"));

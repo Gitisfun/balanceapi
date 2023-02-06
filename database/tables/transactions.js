@@ -7,10 +7,10 @@ import QueryStrings from "../query/QueryStrings.js";
 const TABLE_NAME = "transactions";
 
 const COLUMN_NAME = "name";
-const COLUMN_PRICE = "price";
+export const COLUMN_PRICE = "price";
 const COLUMN_DESCRIPTION = "description";
-const COLUMN_DATE = "date";
-const COLUMN_TYPE = "type";
+export const COLUMN_DATE = "date";
+export const COLUMN_TYPE = "type";
 const COLUMN_SHOP = "shop";
 
 // JOIN
@@ -39,13 +39,20 @@ function QUERY_GET_ALL() {
   const COLUMNS = [COLUMN_NAME, COLUMN_PRICE, COLUMN_DESCRIPTION, COLUMN_DATE, COLUMN_TYPE, COLUMN_SHOP];
   const base = BaseQueries.selectAll(TABLE_NAME, COLUMNS);
   const filtering = QueryStrings.all(fields, COLUMN_DATE, "DESC");
+  console.log(base + " " + filtering);
   return base + " " + filtering;
 }
 
 function QUERY_COUNT() {
   const fields = ["name", "description"];
-
   return BaseQueries.count(TABLE_NAME, fields);
+}
+
+function QUERY_GET_ALL_MONTH() {
+  const COLUMNS = [COLUMN_NAME, COLUMN_PRICE, COLUMN_DESCRIPTION, COLUMN_DATE, COLUMN_TYPE, COLUMN_SHOP, Columns.IS_ACTIVE];
+  const base = BaseQueries.selectAll(TABLE_NAME, COLUMNS);
+  const where = ` AND MONTH(${COLUMN_DATE}) = ? AND YEAR(${COLUMN_DATE}) = ?`;
+  return base + where;
 }
 
 function QUERY_GET() {
@@ -54,7 +61,7 @@ function QUERY_GET() {
 }
 
 function QUERY_GET_SHOP() {
-  return `SELECT DISTINCT ${COLUMN_SHOP} FROM ${TABLE_NAME} WHERE ${COLUMN_SHOP} IS NOT NULL AND ${Columns.USER_ID} = ?`;
+  return `SELECT DISTINCT ${COLUMN_SHOP} FROM ${TABLE_NAME} WHERE ${COLUMN_SHOP} IS NOT NULL AND ${Columns.USER_ID} = ? AND ${Columns.IS_ACTIVE} = 1`;
 }
 
 function QUERY_CREATE() {
@@ -71,4 +78,4 @@ function QUERY_DELETE() {
   return BaseQueries.delete(TABLE_NAME);
 }
 
-export { QUERY_GET, QUERY_GET_SHOP, QUERY_COUNT, QUERY_GET_ALL, QUERY_CREATE, QUERY_UPDATE, QUERY_DELETE };
+export { QUERY_GET, QUERY_GET_ALL_MONTH, QUERY_GET_SHOP, QUERY_COUNT, QUERY_GET_ALL, QUERY_CREATE, QUERY_UPDATE, QUERY_DELETE };
